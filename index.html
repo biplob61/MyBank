@@ -33,7 +33,7 @@
                         <div class="Withdraw status">
                             <h5>Withdraw</h5>
                             <br>
-                            <h2>$00</h2>
+                            <h2>$<span id="currentWithdraw">00</span></h2>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -73,16 +73,18 @@
         const depositBtn = document.getElementById("addDeposit");
         depositBtn.addEventListener("click",function (){    
              const depositNumber = getInputNumber("depositAmount");   
-             //console.log(depositNumber);
+             //(
+               //  console.log(depositNumber);
 
             // const currentDeposit = document.getElementById("currentDeposit").innerText;
             // const currentDepositNumber = parseFloat(currentDeposit);
             // const totalDeposit = depositNumber + currentDepositNumber;
             //  //console.log(totalDeposit);
-            // document.getElementById('currentDeposit').innerText = totalDeposit;
+            // document.getElementById('currentDeposit').innerText = totalDeposit;)
             spanTextUpdating("currentDeposit",depositNumber);
-            
             spanTextUpdating("currentBalance",depositNumber);
+
+            document.getElementById("depositAmount").value="";
             
         })
         //withdraw button event handler  //
@@ -90,11 +92,15 @@
         withdrawBtn.addEventListener("click",function () {
             const withdrawNumber = getInputNumber("withdrawAmount");
             console.log(withdrawNumber);
+            spanTextUpdating("currentWithdraw",withdrawNumber);
+            spanTextUpdating("currentBalance", -1*withdrawNumber);
+
+
+            document.getElementById("withdrawAmount").value="";
         })
         function getInputNumber(id) {
             const Amount = document.getElementById(id).value;
             const AmountNumber = parseFloat(Amount);
-            
             return AmountNumber;
         }
         function spanTextUpdating(id,depositNumber) {
